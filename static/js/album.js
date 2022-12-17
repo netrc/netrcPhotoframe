@@ -63,7 +63,7 @@ function listAlbums() {
       // Library API.  
       //$.each(data.albums, (i, item) => {
       const cmpstr = (a, b) => a == b ? 0 : a < b ? -1 : 1
-      const sortBy = k => (a, b) => cmpstr(a[k], b[k])
+      const sortBy = k => (a, b) => cmpstr(a[k].toLowerCase(), b[k].toLowerCase())
       //const has = k => o => (k in o)
       const fixKey = k => i => ( (k in i) ? i : { [k]: '__missing', ... i } )
       
@@ -77,7 +77,7 @@ function listAlbums() {
 
         // Set up a Material Design Lite list.
         const materialDesignLiteList =
-          $('<li />').addClass('mdl-list__item mdl-list__item--two-line');
+          $('<li />').addClass('mdl-list__item ' /*mdl-list__item--two-line*/);
 
         // Create the primary content for this list item.
         const primaryContentRoot =
@@ -92,15 +92,15 @@ function listAlbums() {
         primaryContentRoot.append(primaryContentImage);
 
         // The title of the album as the primary title of this item.
-        const primaryContentTitle = $('<div />').text(item.title);
+        const primaryContentTitle = $('<div />').text(`${item.title} (${item.mediaItemsCount})`);
         primaryContentRoot.append(primaryContentTitle);
 
         // The number of items in this album as the sub title.
-        const primaryContentSubTitle =
-          $('<div />')
-            .text(`(${item.mediaItemsCount} items)`)
-            .addClass('mdl-list__item-sub-title');
-        primaryContentRoot.append(primaryContentSubTitle);
+        //const primaryContentSubTitle =
+        //  $('<div />')
+        //    .text(`(${item.mediaItemsCount} items)`)
+        //    .addClass('mdl-list__item-sub-title');
+        //primaryContentRoot.append(primaryContentSubTitle);
 
         // Secondary content consists of two links with buttons.
         const secondaryContentRoot =
@@ -132,7 +132,7 @@ function listAlbums() {
         // The button for the 'open in Google Photos' link.
         const googlePhotosButton = $('<button />')
           .addClass('gp-button raised')
-          .text('Open in Google Photos');
+        //  .text('Open in Google Photos');
         linkToGooglePhotos.append(googlePhotosButton);
 
         // Add the list item to the list of albums.
