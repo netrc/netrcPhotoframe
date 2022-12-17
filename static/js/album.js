@@ -64,8 +64,10 @@ function listAlbums() {
       //$.each(data.albums, (i, item) => {
       const cmpstr = (a, b) => a == b ? 0 : a < b ? -1 : 1
       const sortBy = k => (a, b) => cmpstr(a[k], b[k])
-      const has = k => o => (k in o)
-      const cleanData = Object.values(data.albums).filter(has('title'))
+      //const has = k => o => (k in o)
+      const fixKey = k => i => ( (k in i) ? i : { [k]: '__missing', ... i } )
+      
+      const cleanData = Object.values(data.albums).map(fixKey('title'))
       const sortedAlbums = Object.values(cleanData).sort(sortBy('title'))
       console.log('sorted albums: ', sortedAlbums.length)
       sortedAlbums.forEach(item => {
