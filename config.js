@@ -24,7 +24,7 @@ config.oAuthclientSecret = process.env['G_CLIENT_SECRET'];
 
 // The callback to use for OAuth requests. This is the URL where the app is
 // running. For testing and running it locally, use 127.0.0.1.
-config.oAuthCallbackUrl = 'https://netrcPhotoframe.gnetrc.repl.co/auth/google/callback';
+config.oAuthCallbackUrl = process.env['G_CLIENT_CALLBACKURL'];
 
 // The port where the app should listen for requests.
 config.port = 8080;
